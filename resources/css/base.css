@@ -1,0 +1,10 @@
+@scope {
+    #example_plugin_div {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    #example_plugin_div img {
+        width: 100%
+    }
+}
