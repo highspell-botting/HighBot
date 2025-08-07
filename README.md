@@ -1,9 +1,16 @@
-# Highlite Example Plugin Template
+# HighspellBotting Plugin
 
-A template repository for creating plugins for the HighLite client. This template showcases the basic structure, lifecycle methods, and how to use static resources like HTML, CSS, images, and audio files.
+A comprehensive automation plugin for the HighLite client that provides a modular scripting system for various in-game activities including combat, mining, gathering, crafting, and utility tasks.
 
-> **📋 This is a Template Repository**  
-> Use this template to quickly create your own HighLite plugin by clicking the "Use this template" button on GitHub, or generate a new repository from this template.
+## Features
+
+- **Modular Script System**: Organized script categories for different activities
+- **Combat Automation**: Fighters, range training, and boss scripts
+- **Resource Gathering**: Woodcutting, mining, fishing, thieving, and harvesting
+- **Crafting Automation**: Smithing, cooking, fletching, and potion making
+- **Utility Scripts**: Teleports, and item management
+- **Safety Features**: Player detection and health monitoring
+- **TypeScript Support**: Full type safety and IntelliSense support
 
 ## Getting Started
 
@@ -14,17 +21,17 @@ A template repository for creating plugins for the HighLite client. This templat
 
 ### Installation
 
-1. **Use this template**: Click the "Use this template" button on GitHub to create a new repository based on this template
-2. **Clone your new repository**: 
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_PLUGIN_NAME.git
-   cd YOUR_PLUGIN_NAME
+   git clone https://github.com/YOUR_USERNAME/HighBot.git
+   cd HighspellBotting
    ```
-3. **Install dependencies**:
 
-```bash
-yarn install
-```
+2. **Install dependencies**:
+   ```bash
+   yarn install
+   ```
+
 ### Development
 
 To build the plugin in development mode with file watching:
@@ -39,49 +46,17 @@ To build the plugin for production:
 yarn build
 ```
 
-The built plugin will be available in the `dist/` directory as `ExamplePlugin.js`.
+The built plugin will be available in the `dist/` directory as `HighspellBotting.js`.
 
-## Project Structure
+### Building the Distribution File
 
-```
-Example-Plugin/
-├── src/
-│   ├── ExamplePlugin.ts    # Main plugin class
-│   └── types.d.ts          # TypeScript type declarations for static resources
-├── resources/
-│   ├── css/
-│   │   └── base.css        # Stylesheet for the plugin
-│   ├── html/
-│   │   └── html.html       # HTML template
-│   ├── images/
-│   │   └── image.png       # Example image asset
-│   └── sounds/
-│       └── sound.mp3       # Exammple audio asset
-├── package.json            # Project configuration and dependencies
-├── rollup.config.mjs       # Build configuration
-├── tsconfig.json          # TypeScript configuration
-└── README.md              # This file
-```
+The main distribution file `HighspellBotting.js` is built from the TypeScript source files. Here's how the build process works:
 
-## Configuration
+1. **Source Files**: The main entry point is `src/HighspellBotting.ts`
+2. **Script Modules**: Individual scripts are organized in `src/scripts/` by category
+3. **Build Output**: The build process bundles everything into `dist/HighspellBotting.js`
 
-### Plugin Configuration
-
-The main plugin class extends the base `Plugin` class from `@highlite/plugin-api`:
-
-```typescript
-class ExamplePlugin extends Plugin {
-    pluginName = "ExamplePlugin";
-    author: string = "Your Name";  // Update this with your name
-    
-    // Plugin lifecycle methods
-    init(): void { }
-    start(): void { }
-    stop(): void { }
-}
-```
-
-### Build Configuration
+#### Build Configuration
 
 The plugin uses Rollup for bundling with the following features:
 
@@ -96,81 +71,113 @@ Key configuration options in `rollup.config.mjs`:
 - Audio files: Inlined up to 5MB
 - HTML/CSS: Always inlined as strings
 
-## Using Static Resources
+#### Build Commands
 
-This example demonstrates how to import and use various types of static resources:
+```bash
+# Development build with watching
+yarn dev
 
-### HTML Templates
+# Production build
+yarn build
 
-```typescript
-import htmlContent from "../resources/html/html.html";
-
-// Use in your plugin
-document.getElementById("app")!.innerHTML = htmlContent;
+# Clean build (remove dist folder first)
+yarn clean && yarn build
 ```
 
-### CSS Stylesheets
+## Project Structure
 
-```typescript
-import styles from "../resources/css/base.css";
-
-// Inject styles into the document
-const styleElement = document.createElement('style');
-styleElement.textContent = styles;
-document.head.appendChild(styleElement);
+```
+HighspellBotting/
+├── src/
+│   ├── HighspellBotting.ts           # Main plugin class
+│   ├── HighspellBottingScripts.ts    # Script orchestrator
+│   ├── core/
+│   │   └── BaseScript.ts             # Base class for all scripts
+│   ├── types/
+│   │   ├── ScriptContext.ts          # Script context interface
+│   │   └── ScriptTypes.ts            # Type definitions
+│   ├── metadata/
+│   │   └── ScriptMetadata.ts         # UI metadata for scripts
+│   ├── scripts/
+│   │   ├── combat/                   # Combat-related scripts
+│   │   ├── mining/                   # Mining scripts
+│   │   ├── gathering/                # Gathering scripts
+│   │   ├── crafting/                 # Crafting scripts
+│   │   └── utility/                  # Utility scripts
+│   └── types.d.ts                    # TypeScript declarations
+├── resources/
+│   ├── css/
+│   │   └── botting-panel.css         # Plugin UI styles
+│   ├── html/
+│   │   └── botting-panel.html        # Plugin UI template
+│   ├── images/                       # Plugin images
+│   └── sounds/                       # Plugin audio files
+├── dist/
+│   └── HighspellBotting.js           # Built plugin file
+├── package.json                      # Project configuration
+├── rollup.config.mjs                 # Build configuration
+├── tsconfig.json                     # TypeScript configuration
+└── README.md                         # This file
 ```
 
-### Images
+## Writing Scripts
 
+For detailed information on how to write scripts for this plugin, see the comprehensive guide:
+
+**[📖 Script Writing Guide](src/README_SCRIPT_STRUCTURE.md)**
+
+This guide covers:
+- Script structure and basic concepts
+- Available methods and functions
+- Common script patterns
+- Best practices and troubleshooting
+- Advanced scripting techniques
+
+### Quick Start for Script Writers
+
+1. **Choose a category**: Place your script in the appropriate `src/scripts/` subdirectory
+2. **Extend BaseScript**: All scripts should extend the `BaseScript` class
+3. **Implement execute()**: This is your main script method
+4. **Use the context**: Access game methods via `this.context`
+5. **Follow patterns**: Use the established patterns for your script type
+
+Example script structure:
 ```typescript
-import imageSrc from "../resources/images/image.png";
+import { BaseScript } from '../../core/BaseScript';
 
-// Use the image source
-const img = document.createElement('img');
-img.src = imageSrc;
+export class ScriptYourScript extends BaseScript {
+  async execute(param1: string, param2: number): Promise<void> {
+    const { log, updateStatus, wait, isSkilling } = this.context;
+    
+    while (this.plugin.isScriptRunning) {
+      if (!isSkilling()) {
+        // Your script logic here
+        updateStatus("Working...");
+      } else {
+        await wait(5000);
+      }
+    }
+  }
+}
 ```
 
-### Audio Files
+## Plugin Configuration
+
+The main plugin class extends the base `Plugin` class from `@highlite/plugin-api`:
 
 ```typescript
-import audioSrc from "../resources/sounds/sound.mp3";
-
-// Use the audio source
-const audio = new Audio(audioSrc);
-audio.play();
+class HighspellBotting extends Plugin {
+    pluginName = "HighBot";
+    author: string = "Your Name";
+    
+    // Plugin lifecycle methods
+    init(): void { }
+    start(): void { }
+    stop(): void { }
+}
 ```
 
-### Type Declarations
-
-The `types.d.ts` file provides TypeScript support for importing static resources:
-
-- Image formats: `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.webp`
-- Audio formats: `.mp3`, `.wav`
-- Web assets: `.css`, `.html`
-
-### Development Tips
-
-1. **Resource Management**: Keep resource files organized in the `resources/` directory
-2. **Debugging**: Use the `this.log()` method for development debugging
-
-### Customization
-
-To customize this template for your own plugin:
-
-1. **Rename your plugin**: Update the `pluginName` and `author` properties in `src/ExamplePlugin.ts`
-2. **Update package.json**: 
-   - Change the `name` field to match your plugin name (e.g., `"YourPluginName"`)
-   - Update the `main` field if you rename the main TypeScript file (e.g., `"src/YourPluginName.ts"`)
-   - Rerun `yarn install` to make the worksapce properly recognize the new package name
-3. **Replace the HTML content** in `resources/html/html.html`
-4. **Modify styles** in `resources/css/base.css`
-5. **Add your own images and audio files** to the respective directories
-6. **Implement your plugin logic** in the lifecycle methods
-7. **Update this README** to describe your specific plugin functionality
-
-## Testing Plugins
-
-Testing your plugin locally is essential before publishing to the Plugin Hub. HighLite provides a convenient way to test plugins without going through the remote distribution process.
+## Testing the Plugin
 
 ### Local Testing Setup
 
@@ -180,41 +187,44 @@ Testing your plugin locally is essential before publishing to the Plugin Hub. Hi
    cd HighLiteDesktop
    ```
 
-2. **Build your plugin**:
-   Navigate back to your plugin directory and build it:
+2. **Build the plugin**:
    ```bash
-   cd /path/to/your/plugin
+   cd /path/to/HighBot
    yarn build
    ```
 
 3. **Copy the built plugin**:
-   Copy your built plugin file to the HighLite plugins directory:
    ```bash
-   cp dist/ExamplePlugin.js /path/to/HighLiteDesktop/src/renderer/client/plugins/
+   cp dist/HighspellBotting.js /path/to/HighLiteDesktop/src/renderer/client/plugins/
    ```
 
 ### Testing Guidelines
 
-- **Plugin Location**: Place any built plugin (e.g., `PluginName.js`) in `HighliteDesktop/src/renderer/client/plugins/`
-- **Automatic Loading**: Plugins in this directory are automatically loaded by the client
-- **Name Conflicts**: If testing an existing Plugin Hub plugin, temporarily use a different name to avoid conflicts with the remotely pulled version
-- **Hot Reloading**: After making changes, rebuild your plugin and replace the file in the plugins directory
+- **Plugin Location**: Place `HighspellBotting.js` in `HighliteDesktop/src/renderer/client/plugins/`
+- **Automatic Loading**: The plugin will be automatically loaded by the client
+- **Hot Reloading**: After making changes, rebuild and replace the file in the plugins directory
+- **Script Testing**: Test individual scripts through the plugin's UI interface
 
 ### Testing Workflow
 
-1. Make changes to your plugin code
+1. Make changes to your plugin code or scripts
 2. Run `yarn build` to create the updated plugin file
 3. Copy the new build to the HighLite plugins directory
 4. Restart HighLite to load the updated plugin
-5. Test your plugin functionality
+5. Test your plugin functionality and scripts
 6. Repeat as needed
 
-### Debugging Tips
+## Available Scripts
 
-- Use `this.log()` method in your plugin for debugging output
-- Check the HighLite console for any error messages
-- Verify your plugin follows the correct lifecycle methods (`init()`, `start()`, `stop()`)
-- Ensure all static resources are properly bundled and accessible
+The plugin only includes one example script to get you started.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Write your scripts following the [Script Writing Guide](src/README_SCRIPT_STRUCTURE.md)
+4. Test your changes thoroughly
+5. Submit a pull request
 
 ## License
 

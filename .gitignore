@@ -148,3 +148,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Scripts folder - ignore all script files except scriptExample.ts
+src/scripts/**/*.ts
+!src/scripts/**/scriptExample.ts

@@ -1,0 +1,30 @@
+<div class="botting-panel">
+  
+  <div class="script-selector">
+    <label for="script-select">Select Script:</label>
+    <select id="script-select">
+      <option value="">-- Select a script --</option>
+      <!-- Script options will be dynamically inserted here -->
+    </select>
+  </div>
+  
+  <div id="script-panel" class="script-panel">
+    <!-- Script-specific content will be inserted here -->
+  </div>
+  
+  <div class="control-panel">
+    <button id="run-script" class="btn btn-primary">Run Script</button>
+    <button id="stop-script" class="btn btn-danger">Stop</button>
+  </div>
+  
+  <div class="status-panel">
+    <div class="status-item">
+      <span class="status-label">Status:</span>
+      <span id="botting-status" class="status-value">Ready</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Last Action:</span>
+      <span id="last-action" class="status-value">None</span>
+    </div>
+  </div>
+</div> 

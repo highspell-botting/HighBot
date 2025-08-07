@@ -1,5 +1,5 @@
 {
-  "name": "ExamplePlugin",
+  "name": "HighspellBotting",
   "packageManager": "yarn@4.9.1",
   "engines": {
     "node": ">=22.0.0"
@@ -7,9 +7,9 @@
   "scripts": {
     "build": "node build.mjs"
   },
-  "main": "src/ExamplePlugin.ts",
+  "main": "src/HighspellBotting.ts",
   "devDependencies": {
-    "@highlite/plugin-api": "^1.0.13",
+    "@highlite/plugin-api": "^1.1.0",
     "esbuild": "^0.25.8",
     "typescript": "^5.8.3"
   }
