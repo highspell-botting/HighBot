@@ -2,6 +2,8 @@
 
 A comprehensive automation plugin for the HighLite client that provides a modular scripting system for various in-game activities including combat, mining, gathering, crafting, and utility tasks.
 
+This repository comes with no in-built scripts, unfortunately. So you'll have to write your own using the examples included, build, and use! Have fun writing creative solutions to problems. If you have a need for a new method or have an improvement, please fork and make a pull request or open a github issue.
+
 ## Features
 
 - **Modular Script System**: Organized script categories for different activities
